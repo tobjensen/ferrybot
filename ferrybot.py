@@ -135,37 +135,21 @@ def is_departing(ferry):
 
 def arriving(ferry):
     ferry, wharf, latitude, longitude = ferry['label'], ferry['wharf'], ferry['latitude'], ferry['longitude']
-    tweets = [
-        f"Approaching {wharf}",
-        f"{wharf} is looking great",
-        f"{wharf} is looking good",
-        f"{wharf} is looking fine",
-        f"{wharf} is mighty fine",
-        f"Anyone for {wharf}?",
-        f"Can't wait to get to {wharf} - oh wait, I'm already here!",
-        f"TFW you just rolled into {wharf}",
-        f"Hey {wharf}, let's hang out!",
-        f"Hello {wharf}",
-        f"Hello there {wharf}",
-        f"Hey {wharf} - looking great!",
-        f"{wharf} - so, we meet again...",
-        f"What is happening {wharf}!",
-        f"Party people at {wharf} say OOooohhh!",
-        f"Hold me close {wharf}",
-        f"Yo {wharf} - let's do this!",
-        f"OMG! It's {wharf}!",
-        f"Greetings {wharf}, it is I, the ferry {ferry}!",
-        f"Greetings {wharf}",
-        f"Salutations {wharf}"
-    ]
+    textfile = 'arriving.txt'
+    tweets = []
+    with open(textfile) as file:
+        for line in file:
+            tweets.append(line.format(ferry=ferry, wharf=wharf).strip())
     return f"{random.choice(tweets)}\n({latitude}, {longitude})"
 
 
 def departing(ferry):
     ferry, wharf, latitude, longitude = ferry['label'], ferry['wharf'], ferry['latitude'], ferry['longitude']
-    tweets = [
-        f"Here we go! Leaving {wharf} - Tut Tuuut!"
-    ]
+    textfile = 'departing.txt'
+    tweets = []
+    with open(textfile) as file:
+        for line in file:
+            tweets.append(line.format(ferry=ferry, wharf=wharf).strip())
     return f"{random.choice(tweets)}\n({latitude}, {longitude})"
 
 
